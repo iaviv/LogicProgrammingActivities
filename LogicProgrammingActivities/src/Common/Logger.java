@@ -34,28 +34,28 @@ public class Logger {
 	private Logger() {
 	}
 
-	public static void Write(String text) throws IOException {
+	public static void write(String text) throws IOException {
 		FileWriter out = new FileWriter(Consts.LOG_FILE_PATH, true);
-		out.write(GetCurrentDateTime() + ": " + text + "\n");
-		out.write(BreakingLine());
+		out.write(getCurrentDateTime() + ": " + text + "\n");
+		out.write(breakingLine());
 		out.close();
 	}
 	
-	public static void WriteStartTime() throws IOException {
-		Write("JavaDocsAnalysis Starting Time: " + GetCurrentDateTime());
+	public static void writeStartTime() throws IOException {
+		write("JavaDocsAnalysis Starting Time: " + getCurrentDateTime());
 	}
-	public static void WriteEndTime() throws IOException {
-		Write("JavaDocsAnalysis End Time: " + GetCurrentDateTime());
+	public static void writeEndTime() throws IOException {
+		write("JavaDocsAnalysis End Time: " + getCurrentDateTime());
 	}
 
-	public static void Write(Throwable e) {
+	public static void write(Throwable e) {
 		FileWriter out = null;
 		try {
 			out = new FileWriter(Consts.LOG_FILE_PATH, true);
-			out.write(GetCurrentDateTime() + ":\n");
+			out.write(getCurrentDateTime() + ":\n");
 			out.write("Exception Description: " + e.toString() + "\n");
 			out.write("Stack Trace: " + getStackTrace(e));
-			out.write(BreakingLine());
+			out.write(breakingLine());
 			out.close();
 		} catch (IOException e1) {
 			System.err.println("Error while trying writing to the log file. \nStackTrace: ");
@@ -70,17 +70,17 @@ public class Logger {
 		return result.toString();
 	}
 
-	private static String BreakingLine() {
-		return CreateLine(35);
+	private static String breakingLine() {
+		return createLine(35);
 	}
 	
-	public static String GetCurrentDateTime() {
+	public static String getCurrentDateTime() {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date date = new Date();
 		return dateFormat.format(date);
 	}
 
-	private static String CreateLine(int number) {
+	private static String createLine(int number) {
 		String line = new String();
 		for (int i = 0; i <= number; i++) {
 			line += "-";
